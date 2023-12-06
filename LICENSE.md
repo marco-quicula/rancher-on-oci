@@ -1,6 +1,6 @@
-MIT License
+# MIT License
 
-Copyright (c) 2023 Marco Quiçula (BEES)
+Copyright (c) 2023 MARCO QUIÇULA
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
