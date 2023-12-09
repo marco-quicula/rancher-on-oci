@@ -36,7 +36,6 @@ This project exists primarily for learning purposes and is not intended to confi
     - `TF_VAR_fingerprint`
     - `TF_VAR_region`
 
-
 ## Configuring Rancher
 Once the infrastructure is ready, you can configure Rancher. Here are the basic steps:
 

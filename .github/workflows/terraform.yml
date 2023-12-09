@@ -21,7 +21,12 @@ jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    environment: production
+    env:
+      TF_VAR_tenancy_ocid: ${{ vars.TF_VAR_TENANCY_OCID }}
+      TF_VAR_user_ocid: ${{ vars.TF_VAR_USER_OCID }}
+      TF_VAR_fingerprint: ${{ vars.TF_VAR_FINGERPRINT }}
+      TF_VAR_region: ${{ vars.TF_VAR_REGION }}
+      TF_VAR_private_key_path: ${{ secrets.TF_VAR_private_key_path }}
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -53,9 +58,6 @@ jobs:
       env:
         TF_ORGANIZATION: ${{ vars.TF_ORGANIZATION }}
         TF_WORKSPACE: ${{ vars.TF_WORKSPACE }}
-    
-    - name: CAT
-      run: cat backend.tf
     
     # Configure private key to OCI
     - name: OCI Credential - Include private key
