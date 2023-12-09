@@ -14,5 +14,5 @@
 #private_key_path = "your_private_key_path"
 
 #OCI Compartment
-compartment_name        = "rancher-k3s"
+compartment_name        = "my-compartment"
 compartment_description = "Compartment to install the resources."
