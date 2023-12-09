@@ -48,6 +48,7 @@ jobs:
     - name: Setup Terraform - Append values to terraform.tfvars file
       run: |
         echo ' ' >> terraform.tfvars
+        echo '#OCI values generated' >> terraform.tfvars
         echo 'tenancy_ocid     = "'${{ vars.TF_VAR_TENANCY_OCID }}'"' >> terraform.tfvars
         echo 'user_ocid        = "'${{ vars.TF_VAR_user_ocid }}'"' >> terraform.tfvars
         echo 'fingerprint      = "'${{ vars.TF_VAR_fingerprint }}'"' >> terraform.tfvars
