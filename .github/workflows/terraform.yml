@@ -62,7 +62,9 @@ jobs:
     # Generate privatekey.pem file with secret TF_VAR_private_key_value
     - name: Setup Terraform - Generate privatekey.pem file
       run: |
-        echo ${{ secrets.TF_VAR_private_key_value }} > privatekey.pem
+        cat <<EOF >privatekey.pem
+        ${{ secrets.TF_VAR_private_key_value }}
+        EOF
     
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
