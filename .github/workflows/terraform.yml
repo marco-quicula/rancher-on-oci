@@ -44,12 +44,15 @@ jobs:
       run: |
         echo 'terraform {' > backend.tf
         echo '  backend "remote" {' >> backend.tf
-        echo '    organization = "'${{ env.TF_ORGANIZATION }}'"' >> backend.tf
+        echo '    organization = "'$TF_ORGANIZATION'"' >> backend.tf
         echo '    workspaces {' >> backend.tf
-        echo '      name = "'${{ env.TF_WORKSPACE }}'"' >> backend.tf
+        echo '      name = "'$TF_WORKSPACE'"' >> backend.tf
         echo '    }' >> backend.tf
         echo '  }' >> backend.tf
         echo '}' >> backend.tf
+      env:
+        TF_ORGANIZATION: ${{ env.TF_ORGANIZATION }}
+        TF_WORKSPACE: ${{ env.TF_WORKSPACE }}
     
     # Configure private key to OCI
     - name: OCI Credential - Include private key
