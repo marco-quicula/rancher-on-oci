@@ -27,7 +27,7 @@ This project exists primarily for learning purposes and is not intended to confi
 1. First, follow the instructions requested by GitHub.
 2. Ensure that the OCI credentials variables are properly commented in the `terraform.tfvars` file.
 3. Include the following SECRET in your repository.
-    - `TF_VAR_private_key_path` > In this case, you will include the file content in the secret value.
+    - `TF_VAR_private_key_value` > In this case, you will include the file content in the secret value.
 4. Include the following VARIABLES in your repository.
     - `TF_ORGANIZATION`
     - `TF_WORKSPACE`
