@@ -54,6 +54,9 @@ jobs:
         TF_ORGANIZATION: ${{ env.TF_ORGANIZATION }}
         TF_WORKSPACE: ${{ env.TF_WORKSPACE }}
     
+    - name: CAT
+      run: cat backend.tf
+    
     # Configure private key to OCI
     - name: OCI Credential - Include private key
       run: echo "Setting up OCI credentials"
