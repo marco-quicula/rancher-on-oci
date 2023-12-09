@@ -42,10 +42,15 @@ jobs:
     # Include backend configuration
     - name: Setup Terraform - Include backend configuration
       run: |
-        cp backend.tf.ci backend.tf
-      env:
-        TF_VAR_private_key_path: ${{ secrets.TF_VAR_private_key_path }}
-
+        echo 'terraform {' > backend.tf
+        echo '  backend "remote" {' >> backend.tf
+        echo '    organization = "'${{ env.TF_ORGANIZATION }}'"' >> backend.tf
+        echo '    workspaces {' >> backend.tf
+        echo '      name = "'${{ env.TF_WORKSPACE }}'"' >> backend.tf
+        echo '    }' >> backend.tf
+        echo '  }' >> backend.tf
+        echo '}' >> backend.tf
+    
     # Configure private key to OCI
     - name: OCI Credential - Include private key
       run: echo "Setting up OCI credentials"
