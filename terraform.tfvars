@@ -7,7 +7,7 @@
 
 # You can get the values of the variables at the following path: 
 # Identity -> My profile, in the API keys section.
-tenancy_ocid     = "ocid1.tenancy.oc1..aaaaaaaanwj4trreadu3wjweb2wncpt35b2ojc3qfnwogoe746c7yc7tgy7q"
+tenancy_ocid = "ocid1.tenancy.oc1..aaaaaaaanwj4trreadu3wjweb2wncpt35b2ojc3qfnwogoe746c7yc7tgy7q"
 #user_ocid        = "your_user_ocid"
 #fingerprint      = "your_fingerprint"
 #private_key_path = "your_private_key_path"
