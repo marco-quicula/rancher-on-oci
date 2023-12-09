@@ -1,3 +1,5 @@
 # Ignore .terraform directory
 .terraform/
 settings.json
+.terraform.lock.hcl
+terraform.tfstate*
