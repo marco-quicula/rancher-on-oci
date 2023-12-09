@@ -1,9 +1,9 @@
 # The configuration for the `remote` backend.
  terraform {
         backend "remote" {
-            organization = "${{ secrets.TF_ORGANIZATION }}"
+            organization = var.TF_ORGANIZATION
             workspaces {
-                name = "${{ secrets.TF_WORKSPACE }}"
+                name = var.TF_WORKSPACE
             }
         }
     }
