@@ -73,6 +73,14 @@ jobs:
     - name: Terraform Format
       run: terraform fmt -check
 
+    - name: ECHO
+      run: |
+        echo $TF_VAR_tenancy_ocid
+        echo $TF_VAR_user_ocid
+        echo $TF_VAR_fingerprint
+        echo $TF_VAR_region
+        echo $TF_VAR_private_key_path
+        
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -input=false
