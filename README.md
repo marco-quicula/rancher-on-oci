@@ -29,6 +29,8 @@ This project exists primarily for learning purposes and is not intended to confi
 3. Include the following SECRET in your repository.
     - `TF_VAR_private_key_path` > In this case, you will include the file content in the secret value.
 4. Include the following VARIABLES in your repository.
+    - `TF_ORGANIZATION`
+    - `TF_WORKSPACE`
     - `TF_VAR_tenancy_ocid`
     - `TF_VAR_user_ocid`
     - `TF_VAR_fingerprint`
