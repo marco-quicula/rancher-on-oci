@@ -1,9 +1,0 @@
-# The configuration for the `remote` backend.
- terraform {
-        backend "remote" {
-            organization = ""
-            workspaces {
-                name = ""
-            }
-        }
-    }

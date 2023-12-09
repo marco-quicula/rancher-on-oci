@@ -21,9 +21,9 @@ variable "region" {
 
 #OCI Compartment
 variable "compartment_name" {
-    default = ""
+  default = ""
 }
 
 variable "compartment_description" {
-    default = ""
+  default = ""
 }
