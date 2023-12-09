@@ -51,8 +51,8 @@ jobs:
         echo '  }' >> backend.tf
         echo '}' >> backend.tf
       env:
-        TF_ORGANIZATION: ${{ env.TF_ORGANIZATION }}
-        TF_WORKSPACE: ${{ env.TF_WORKSPACE }}
+        TF_ORGANIZATION: ${{ vars.TF_ORGANIZATION }}
+        TF_WORKSPACE: ${{ vars.TF_WORKSPACE }}
     
     - name: CAT
       run: cat backend.tf
