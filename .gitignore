@@ -1,0 +1,3 @@
+# Ignore .terraform directory
+.terraform/
+settings.json
