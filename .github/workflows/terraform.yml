@@ -48,6 +48,7 @@ jobs:
 
     # Configure private key to OCI
     - name: OCI Credential - Include private key
+      run: echo "Setting up OCI credentials"
       env:
         TF_VAR_private_key_path: ${{ secrets.TF_VAR_private_key_path }}
     
