@@ -25,7 +25,8 @@ jobs:
   terraform:
     name: 'Terraform JOB'
     runs-on: ubuntu-latest
-    environment: ${{ vars.TF_VAR_COMPARTMENT }}
+    environment: 
+      name: ${{ contains(github.ref, 'main') && 'production' || contains(github.ref, 'development') && 'development' || 'other' }}
     
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -41,7 +42,7 @@ jobs:
     - name: Setup Terraform - Include backend configuration
       run: |
         cat <<EOF >backend.tf
-        terraform {'
+        terraform {
           backend "remote" {
             organization = "${{ vars.TF_ORGANIZATION }}"
             workspaces {
