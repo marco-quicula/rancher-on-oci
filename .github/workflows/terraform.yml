@@ -6,7 +6,7 @@
 # Documentation for `hashicorp/setup-terraform` is located here: https://github.com/hashicorp/setup-terraform
 #
 
-name: 'Terraform'
+name: 'Terraform CI/CD'
 
 on:
   push:
@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   terraform:
-    name: 'Terraform'
+    name: 'Terraform JOB'
     runs-on: ubuntu-latest
     
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
@@ -52,7 +52,7 @@ jobs:
         echo 'TF_VAR_user_ocid        = "'${{ vars.TF_VAR_user_ocid }}'"' >> terraform.tfvars
         echo 'TF_VAR_fingerprint      = "'${{ vars.TF_VAR_fingerprint }}'"' >> terraform.tfvars
         echo 'TF_VAR_region           = "'${{ vars.TF_VAR_region }}'"' >> terraform.tfvars
-        echo 'TF_VAR_private_key_path = privatekey.pem' >> terraform.tfvars
+        echo 'TF_VAR_private_key_path = "privatekey.pem"' >> terraform.tfvars
         cat terraform.tfvars
     
     # Generate privatekey.pem file with secret TF_VAR_private_key_value
