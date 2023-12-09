@@ -1,29 +1,15 @@
 # OCI Credentials.
-variable "tenancy_ocid" {
-  default = ""
-}
+variable "tenancy_ocid" {}
 
-variable "user_ocid" {
-  default = ""
-}
+variable "user_ocid" {}
 
-variable "fingerprint" {
-  default = ""
-}
+variable "fingerprint" {}
 
-variable "private_key_path" {
-  default = ""
-}
+variable "private_key_path" {}
 
-variable "region" {
-  default = ""
-}
+variable "region" {}
 
 #OCI Compartment
-variable "compartment_name" {
-  default = ""
-}
+variable "compartment_name" {}
 
-variable "compartment_description" {
-  default = ""
-}
+variable "compartment_description" {}

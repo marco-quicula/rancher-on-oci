@@ -21,13 +21,7 @@ jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    env:
-      TF_VAR_tenancy_ocid: ${{ vars.TF_VAR_TENANCY_OCID }}
-      TF_VAR_user_ocid: ${{ vars.TF_VAR_USER_OCID }}
-      TF_VAR_fingerprint: ${{ vars.TF_VAR_FINGERPRINT }}
-      TF_VAR_region: ${{ vars.TF_VAR_REGION }}
-      TF_VAR_private_key_path: ${{ secrets.TF_VAR_private_key_path }}
-
+    
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
@@ -49,15 +43,21 @@ jobs:
       run: |
         echo 'terraform {' > backend.tf
         echo '  backend "remote" {' >> backend.tf
-        echo '    organization = "'$TF_ORGANIZATION'"' >> backend.tf
+        echo '    organization = "'${{ vars.TF_ORGANIZATION }}'"' >> backend.tf
         echo '    workspaces {' >> backend.tf
-        echo '      name = "'$TF_WORKSPACE'"' >> backend.tf
+        echo '      name = "'${{ vars.TF_WORKSPACE }}'"' >> backend.tf
         echo '    }' >> backend.tf
         echo '  }' >> backend.tf
         echo '}' >> backend.tf
-      env:
-        TF_ORGANIZATION: ${{ vars.TF_ORGANIZATION }}
-        TF_WORKSPACE: ${{ vars.TF_WORKSPACE }}
+    
+    # Include backend configuration
+    - name: Setup Terraform - Include new terraform.auto.tfvars file
+      run: |
+        echo 'TF_VAR_tenancy_ocid     = "'${{ vars.TF_VAR_TENANCY_OCID }}'"' > terraform.auto.tfvars
+        echo 'TF_VAR_user_ocid        = "'${{ vars.TF_VAR_user_ocid }}'"' >> terraform.auto.tfvars
+        echo 'TF_VAR_fingerprint      = "'${{ vars.TF_VAR_fingerprint }}'"' >> terraform.auto.tfvars
+        echo 'TF_VAR_region           = "'${{ vars.TF_VAR_region }}'"' >> terraform.auto.tfvars
+        echo 'TF_VAR_private_key_path = "'${{ secrets.TF_VAR_private_key_path }}'"' >> terraform.auto.tfvars
     
     # Configure private key to OCI
     - name: OCI Credential - Include private key
@@ -73,20 +73,12 @@ jobs:
     - name: Terraform Format
       run: terraform fmt -check
 
-    - name: ECHO
-      run: |
-        echo $TF_VAR_tenancy_ocid
-        echo $TF_VAR_user_ocid
-        echo $TF_VAR_fingerprint
-        echo $TF_VAR_region
-        echo $TF_VAR_private_key_path
-        
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: terraform plan -input=false
+      run: terraform plan -input=false -var-file="terraform.auto.tfvars" -var-file="terraform.tfvars" -out=plan.tfplan
 
     # On push to "main", build or change infrastructure according to Terraform configuration files
     # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
       if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
-      run: terraform apply -auto-approve -input=false
+      run: terraform apply -auto-approve -input=false -var-file="terraform.auto.tfvars" -var-file="terraform.tfvars" 
