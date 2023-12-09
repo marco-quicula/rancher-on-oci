@@ -14,14 +14,26 @@ Uncover the magic of container orchestration with this repository! Here you'll f
 This project exists primarily for learning purposes and is not intended to configure an environment with all the characteristics of a production environment, although it serves as a good base example for the same.
 
 ## Prerequisites
-- Terraform v0.12+
-- OCI account with administrative privileges
+- <a href="https://developer.hashicorp.com/terraform/install?product_intent=terraform">Terraform</a>
+- <a href="https://www.oracle.com/br/cloud/sign-in.html">OCI account with administrative privileges</a>
 
 ## How to use
 1. Clone this repository
-2. Configure your OCI credentials in the `vars.tf` file
+2. Configure your OCI credential variables as local variables using the example `setenv.sh` file that exists in the project, or directly modify the `terraform.tfvars` file, as instructed in this file.
 3. Run `terraform init` to initialize Terraform
 4. Run `terraform apply` to create the infrastructure
+
+## Extra instructions to set up Github Action pipeline
+1. First, follow the instructions requested by GitHub.
+2. Ensure that the OCI credentials variables are properly commented in the `terraform.tfvars` file.
+3. Include the following SECRET in your repository.
+    - `TF_VAR_private_key_path` > In this case, you will include the file content in the secret value.
+4. Include the following VARIABLES in your repository.
+    - `TF_VAR_tenancy_ocid`
+    - `TF_VAR_user_ocid`
+    - `TF_VAR_fingerprint`
+    - `TF_VAR_region`
+
 
 ## Configuring Rancher
 Once the infrastructure is ready, you can configure Rancher. Here are the basic steps:
