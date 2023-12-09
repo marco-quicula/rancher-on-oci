@@ -41,6 +41,8 @@ jobs:
     - name: Setup Terraform for CI
       run: |
         cp backend.tf.ci backend.tf
+      env:
+        TF_VAR_private_key_path: ${{ secrets.TF_VAR_private_key_path }}
     
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
