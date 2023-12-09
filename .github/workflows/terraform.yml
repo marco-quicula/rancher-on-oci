@@ -10,9 +10,13 @@ name: 'Terraform CI/CD'
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
+      - development
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
+      - development
 
 permissions:
   contents: read
@@ -21,6 +25,8 @@ jobs:
   terraform:
     name: 'Terraform JOB'
     runs-on: ubuntu-latest
+    environment: 
+      name: ${{ contains(github.ref, 'main') && 'production' || contains(github.ref, 'development') && 'development' || 'other' }}
     
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -35,26 +41,50 @@ jobs:
     # Include backend configuration
     - name: Setup Terraform - Include backend configuration
       run: |
-        echo 'terraform {' > backend.tf
-        echo '  backend "remote" {' >> backend.tf
-        echo '    organization = "'${{ vars.TF_ORGANIZATION }}'"' >> backend.tf
-        echo '    workspaces {' >> backend.tf
-        echo '      name = "'${{ vars.TF_WORKSPACE }}'"' >> backend.tf
-        echo '    }' >> backend.tf
-        echo '  }' >> backend.tf
-        echo '}' >> backend.tf
+        cat <<EOF >backend.tf
+        terraform {
+          backend "remote" {
+            organization = "${{ vars.TF_ORGANIZATION }}"
+            workspaces {
+              name = "${{ vars.TF_WORKSPACE }}"
+            }
+          }
+        }
+        EOF
+        cat backend.tf
     
-    # Append values to terraform.tfvars file
-    - name: Setup Terraform - Append values to terraform.tfvars file
+    # Change values to terraform.tfvars file - OCI Credentials
+    - name: Setup Terraform - Change values to terraform.tfvars file - OCI Credentials
       run: |
-        echo ' ' >> terraform.tfvars
-        echo '#OCI values generated' >> terraform.tfvars
-        echo 'tenancy_ocid     = "'${{ vars.TF_VAR_TENANCY_OCID }}'"' >> terraform.tfvars
-        echo 'user_ocid        = "'${{ vars.TF_VAR_user_ocid }}'"' >> terraform.tfvars
-        echo 'fingerprint      = "'${{ vars.TF_VAR_fingerprint }}'"' >> terraform.tfvars
-        echo 'region           = "'${{ vars.TF_VAR_region }}'"' >> terraform.tfvars
-        echo 'private_key_path = "privatekey.pem"' >> terraform.tfvars
+        echo 'Showing terraform.tfvars file BEFORE changes'
+        cat terraform.tfvars
+        echo 'Removing comments from terraform.tfvars file'
+        sed -i '/^#tenancy_ocid/c\tenancy_ocid' terraform.tfvars
+        sed -i '/^#user_ocid/c\user_ocid' terraform.tfvars
+        sed -i '/^#fingerprint/c\fingerprint' terraform.tfvars
+        sed -i '/^#region/c\region' terraform.tfvars
+        sed -i '/^#private_key_path/c\private_key_path' terraform.tfvars
+        echo 'Changing values to terraform.tfvars file'
+        sed -i '/^tenancy_ocid/c\tenancy_ocid="${{ vars.TF_VAR_tenancy_ocid }}"' terraform.tfvars
+        sed -i '/^user_ocid/c\user_ocid="${{ vars.TF_VAR_user_ocid }}"' terraform.tfvars
+        sed -i '/^fingerprint/c\fingerprint="${{ vars.TF_VAR_fingerprint }}"' terraform.tfvars
+        sed -i '/^region/c\region="${{ vars.TF_VAR_region }}"' terraform.tfvars
+        sed -i '/^private_key_path/c\private_key_path="privatekey.pem"' terraform.tfvars
         terraform fmt terraform.tfvars
+        echo 'Showing terraform.tfvars file AFTER changes'
+        cat terraform.tfvars
+    
+    # Change values to terraform.tfvars file - Compartment values
+    - name: Setup Terraform - Change values to terraform.tfvars file - OCI Compartment
+      run: |
+        echo 'Showing terraform.tfvars file BEFORE changes'
+        cat terraform.tfvars
+        echo 'Removing comments from terraform.tfvars file'
+        sed -i '/^#compartment_name/c\compartment_name' terraform.tfvars
+        echo 'Changing values to terraform.tfvars file'
+        sed -i '/^compartment_name/c\compartment_name="${{ vars.TF_VAR_COMPARTMENT }}"' terraform.tfvars
+        terraform fmt terraform.tfvars
+        echo 'Showing terraform.tfvars file AFTER changes'
         cat terraform.tfvars
     
     # Generate privatekey.pem file with secret TF_VAR_private_key_value
@@ -85,5 +115,5 @@ jobs:
     # On push to "main", build or change infrastructure according to Terraform configuration files
     # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      if: github.event_name == 'push'
       run: terraform apply -auto-approve -input=false

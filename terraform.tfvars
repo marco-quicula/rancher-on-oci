@@ -10,8 +10,8 @@
 #tenancy_ocid     = "your_tenancy_ocid"
 #user_ocid        = "your_user_ocid"
 #fingerprint      = "your_fingerprint"
-#private_key_path = "your_private_key_path"
 #region           = "your_region"
+#private_key_path = "your_private_key_path"
 
 #OCI Compartment
 compartment_name        = "rancher-k3s"
