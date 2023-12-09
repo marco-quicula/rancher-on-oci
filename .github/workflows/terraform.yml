@@ -21,6 +21,7 @@ jobs:
   terraform:
     name: 'Terraform JOB'
     runs-on: ubuntu-latest
+    environment: ${{ vars.TF_VAR_COMPARTMENT }}
     
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -80,10 +81,10 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: terraform plan -input=false
+      run: terraform plan -input=false -var="compartment_name=${{ vars.TF_VAR_COMPARTMENT }}"
 
     # On push to "main", build or change infrastructure according to Terraform configuration files
     # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: terraform apply -auto-approve -input=false
+      run: terraform apply -auto-approve -var="compartment_name=${{ vars.TF_VAR_COMPARTMENT }} -input=false
