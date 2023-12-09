@@ -54,6 +54,7 @@ jobs:
         echo 'fingerprint      = "'${{ vars.TF_VAR_fingerprint }}'"' >> terraform.tfvars
         echo 'region           = "'${{ vars.TF_VAR_region }}'"' >> terraform.tfvars
         echo 'private_key_path = "privatekey.pem"' >> terraform.tfvars
+        terraform fmt terraform.tfvars
         cat terraform.tfvars
     
     # Generate privatekey.pem file with secret TF_VAR_private_key_value
