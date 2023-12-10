@@ -42,16 +42,14 @@ jobs:
     # Generate instance_key file with secret OCI_NODE_PRIVATEKEY - Private Key
     - name: Setup OCI - Generate instance_key file - Private Key
       run: |
-        mkdir -p ~/.ssh
-        cat <<EOF >~/.ssh/instance_key
+        cat <<EOF >instance_key
         ${{ secrets.OCI_NODE_PRIVATEKEY }}
         EOF
     
     # Generate instance_key.pub file with secret OCI_NODE_PUBLICKEY - Public Key
     - name: Setup OCI - Generate instance_key.pub file - Public Key
       run: |
-        mkdir -p ~/.ssh
-        cat <<EOF >~/.ssh/instance_key.pub
+        cat <<EOF >instance_key.pub
         ${{ secrets.OCI_NODE_PUBLICKEY }}
         EOF
     
