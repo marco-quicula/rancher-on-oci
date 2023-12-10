@@ -26,15 +26,22 @@ This project exists primarily for learning purposes and is not intended to confi
 ## Extra instructions to set up Github Action pipeline
 1. First, follow the instructions requested by GitHub.
 2. Ensure that the OCI credentials variables are properly commented in the `terraform.tfvars` file.
-3. Include the following SECRET in your repository.
-    - `TF_VAR_private_key_value` > In this case, you will include the file content in the secret value.
-4. Include the following VARIABLES in your repository.
-    - `TF_ORGANIZATION`
-    - `TF_WORKSPACE`
+cd r3. Include the following SECRETS in your REPOSITORY.
+    - `TF_API_TOKEN` : Terraform user token
+    - `TF_VAR_private_key_value` : In this case, you will include the file content in the secret value. OCI Credential
+4. Include the following SECRETS in your ENVIRONMENT.
+    - `OCI_NODE_PRIVATEKEY` : Access node with ssh
+    - `OCI_NODE_PUBLICKEY` : Access node with ssh
+5. Include the following VARIABLES in your REPOSITORY.
     - `TF_VAR_tenancy_ocid`
     - `TF_VAR_user_ocid`
     - `TF_VAR_fingerprint`
     - `TF_VAR_region`
+6. Include the following VARIABLES in your ENVIRONMENT.
+    - `TF_ORGANIZATION` : Terraform Clod Organization
+    - `TF_WORKSPACE` : Terraform Clod Workspace
+    - `TF_VAR_COMPARTMENT` : OCI Compartment
+
 
 ## Configuring Rancher
 Once the infrastructure is ready, you can configure Rancher. Here are the basic steps:
