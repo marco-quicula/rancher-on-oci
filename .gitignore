@@ -3,3 +3,5 @@
 settings.json
 .terraform.lock.hcl
 terraform.tfstate*
+id_rsa.pub
+.terraform.tfstate.lock.info
