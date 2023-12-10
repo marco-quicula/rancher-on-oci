@@ -39,7 +39,7 @@ locals {
   nodes = {
     for i in range(1, 1 + var.how_many_nodes) :
     i => {
-      node_name          = format("%s%03d", var.prefix_node_name,i)
+      node_name          = format("%s%03d", var.prefix_node_name, i)
       private_ip_address = format("%s.%d", local.truncated_subnet_cidr_block, var.subnet_cidr_block_initial_ip + i)
     }
   }

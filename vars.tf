@@ -52,12 +52,12 @@ variable "prefix_node_name" {
   type    = string
   default = "rancher-"
 }
-variable subnet_cidr_block {
-    type    = string
-    default = "10.0.1.0/24"
+variable "subnet_cidr_block" {
+  type    = string
+  default = "10.0.1.0/24"
 }
 
-variable subnet_cidr_block_initial_ip {
-    type    = number
-    default = 20
+variable "subnet_cidr_block_initial_ip" {
+  type    = number
+  default = 20
 }
