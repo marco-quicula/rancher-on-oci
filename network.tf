@@ -1,10 +1,3 @@
-#Include Public IP
-resource "oci_core_public_ip" "_" {
-  compartment_id = oci_identity_compartment._.id
-  display_name   = format("%s%s", oci_identity_compartment._.name, "-control-plane-public-ip")
-  lifetime       = "RESERVED"
-}
-
 #Include VNC
 resource "oci_core_virtual_network" "_" {
   cidr_block     = "10.0.0.0/16"
@@ -45,7 +38,7 @@ resource "oci_core_default_security_list" "_" {
 
 #Include subnet
 resource "oci_core_subnet" "_" {
-  cidr_block        = "10.0.1.0/24"
+  cidr_block        = var.subnet_cidr_block
   compartment_id    = oci_identity_compartment._.id
   vcn_id            = oci_core_virtual_network._.id
   display_name      = "publicsubnet"

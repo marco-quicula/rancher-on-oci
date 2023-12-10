@@ -39,6 +39,20 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
+    # Generate instance_key file with secret OCI_NODE_PRIVATEKEY - Private Key
+    - name: Setup OCI - Generate instance_key file - Private Key
+      run: |
+        cat <<EOF >instance_key
+        ${{ secrets.OCI_NODE_PRIVATEKEY }}
+        EOF
+    
+    # Generate instance_key.pub file with secret OCI_NODE_PUBLICKEY - Public Key
+    - name: Setup OCI - Generate instance_key.pub file - Public Key
+      run: |
+        cat <<EOF >instance_key.pub
+        ${{ secrets.OCI_NODE_PUBLICKEY }}
+        EOF
+    
     # Include backend configuration
     - name: Setup Terraform - Include backend configuration
       run: |
