@@ -1,5 +1,5 @@
 #Include Public IP
-resource "oci_core_public_ip" "example" {
+resource "oci_core_public_ip" "_" {
   compartment_id = oci_identity_compartment._.id
   display_name   = format("%s%s", oci_identity_compartment._.name, "-control-plane-public-ip")
   lifetime       = "RESERVED"
