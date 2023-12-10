@@ -14,5 +14,5 @@
 #private_key_path = "your_private_key_path"
 
 #OCI Compartment
-compartment_name        = "my-compartment"
+compartment_name        = "mycompartment"
 compartment_description = "Compartment to install the resources."
