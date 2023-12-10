@@ -36,7 +36,7 @@ variable "availability_domain" {
 
 variable "how_many_nodes" {
   type    = number
-  default = 2
+  default = 1
 }
 
 variable "ocpus_per_node" {
@@ -46,12 +46,18 @@ variable "ocpus_per_node" {
 
 variable "memory_in_gbs_per_node" {
   type    = number
-  default = 6
+  default = 8
 }
 variable "prefix_node_name" {
   type    = string
   default = "rancher-"
 }
+
+variable "vnc_cidr_block" {
+  type    = string
+  default = "10.0.0.0/16"
+}
+
 variable "subnet_cidr_block" {
   type    = string
   default = "10.0.1.0/24"
