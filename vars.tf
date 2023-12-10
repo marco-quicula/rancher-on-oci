@@ -60,7 +60,7 @@ variable "vnc_cidr_block" {
 
 variable "subnet_cidr_block" {
   type    = string
-  default = "10.0.20.0/24"
+  default = "10.0.1.0/24"
 }
 
 variable "subnet_cidr_block_initial_ip" {
