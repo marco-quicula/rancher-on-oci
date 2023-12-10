@@ -1,6 +1,6 @@
 #Include VNC
 resource "oci_core_virtual_network" "_" {
-  cidr_block     = "10.0.0.0/16"
+  cidr_block     = var.vnc_cidr_block
   compartment_id = oci_identity_compartment._.id
   display_name   = format("%s%s", "vcn-", oci_identity_compartment._.name)
   dns_label      = substr(oci_identity_compartment._.name, 0, 15)
