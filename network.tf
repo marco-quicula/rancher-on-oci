@@ -10,7 +10,7 @@ resource "oci_core_virtual_network" "_" {
   cidr_block     = "10.0.0.0/16"
   compartment_id = oci_identity_compartment._.id
   display_name   = format("%s%s", "vcn-", oci_identity_compartment._.name)
-  dns_label      = substr(oci_identity_compartment._.name,0,15)
+  dns_label      = substr(oci_identity_compartment._.name, 0, 15)
 }
 
 #Include Internet Gateway
@@ -45,12 +45,12 @@ resource "oci_core_default_security_list" "_" {
 
 #Include subnet
 resource "oci_core_subnet" "_" {
-    cidr_block        = "10.0.1.0/24"
-    compartment_id    = oci_identity_compartment._.id
-    vcn_id            = oci_core_virtual_network._.id
-    display_name      = "publicsubnet"
-    dns_label         = "publicsubnet"
-    security_list_ids = [oci_core_virtual_network._.default_security_list_id]
-    route_table_id    = oci_core_virtual_network._.default_route_table_id
-    dhcp_options_id   = oci_core_virtual_network._.default_dhcp_options_id
+  cidr_block        = "10.0.1.0/24"
+  compartment_id    = oci_identity_compartment._.id
+  vcn_id            = oci_core_virtual_network._.id
+  display_name      = "publicsubnet"
+  dns_label         = "publicsubnet"
+  security_list_ids = [oci_core_virtual_network._.default_security_list_id]
+  route_table_id    = oci_core_virtual_network._.default_route_table_id
+  dhcp_options_id   = oci_core_virtual_network._.default_dhcp_options_id
 }
