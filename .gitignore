@@ -5,3 +5,4 @@ settings.json
 terraform.tfstate*
 id_rsa.pub
 .terraform.tfstate.lock.info
+id_rsa
