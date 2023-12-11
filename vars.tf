@@ -36,12 +36,12 @@ variable "availability_domain" {
 
 variable "how_many_nodes" {
   type    = number
-  default = 1
+  default = 2
 }
 
 variable "ocpus_per_node" {
   type    = number
-  default = 2
+  default = 1
 }
 
 variable "memory_in_gbs_per_node" {
