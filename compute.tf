@@ -31,16 +31,28 @@ resource "oci_core_instance" "_" {
   }
   metadata = {
     ssh_authorized_keys = join("\n", local.authorized_keys)
+    user_data           = data.cloudinit_config._[each.key].rendered
+  }
+  connection {
+    host        = self.public_ip
+    user        = "ubuntu"
+    private_key = local_file.ssh_private_key.content
+  }
+  provisioner "remote-exec" {
+    inline = [
+      "tail -f /var/log/cloud-init-output.log &",
+      "cloud-init status --wait >/dev/null",
+    ]
   }
 }
-
 locals {
   truncated_subnet_cidr_block = join(".", slice(split(".", var.subnet_cidr_block), 0, 3))
   nodes = {
     for i in range(1, 1 + var.how_many_nodes) :
     i => {
-      node_name          = format("%s%03d", var.prefix_node_name, i)
-      private_ip_address = format("%s.%d", local.truncated_subnet_cidr_block, var.subnet_cidr_block_initial_ip + i)
+      node_name             = format("%s%03d", var.prefix_node_name, i)
+      node_number_to_string = format("%03d", i)
+      private_ip_address    = format("%s.%d", local.truncated_subnet_cidr_block, var.subnet_cidr_block_initial_ip + i)
     }
   }
 }
