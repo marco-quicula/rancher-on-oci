@@ -67,3 +67,18 @@ variable "subnet_cidr_block_initial_ip" {
   type    = number
   default = 20
 }
+
+variable "ks3_version" {
+  type    = string
+  default = "v1.26.10+k3s2"
+}
+
+variable "domain_rancher" {
+  type    = string
+  default = "oracle.quicula.com.br"
+}
+
+variable "sub_domain_rancher" {
+  type    = string
+  default = "rancher"
+}
