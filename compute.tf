@@ -36,7 +36,7 @@ resource "oci_core_instance" "_" {
   connection {
     host        = self.public_ip
     user        = "ubuntu"
-    private_key = local_file.ssh_private_key.conte
+    private_key = local_file.ssh_private_key.content
   }
   provisioner "remote-exec" {
     inline = [
