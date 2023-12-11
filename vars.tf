@@ -41,7 +41,7 @@ variable "how_many_nodes" {
 
 variable "ocpus_per_node" {
   type    = number
-  default = 1
+  default = 2
 }
 
 variable "memory_in_gbs_per_node" {
