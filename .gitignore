@@ -1,12 +1,13 @@
-# Ignore .terraform directory
+# Ignored files and directories
 .terraform/
-settings.json
-.terraform.lock.hcl
-terraform.tfstate*
-id_rsa.pub
 .terraform.tfstate.lock.info
+.terraform.lock.hcl
+id_rsa.pub
 id_rsa
 instance_key
 instance_key.pub
+kubeconfig
+settings.json
+terraform.tfstate*
 terraform_to_oci
-k3s.yaml
+terraform_to_oci.pub
