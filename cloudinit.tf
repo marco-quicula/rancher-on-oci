@@ -5,6 +5,8 @@ data "cloudinit_config" "_" {
     content_type = "text/cloud-config"
     content      = <<-EOF
       hostname: ${each.value.node_name}
+      - name: ubuntu
+        sudo: ALL=(ALL) NOPASSWD:ALL
       EOF
   }
 
@@ -38,6 +40,8 @@ data "cloudinit_config" "_" {
         sleep 10
       done
       echo "K3S API server ($KUBE_API_SERVER) appears to be up."
+      sudo cp /etc/rancher/k3s/k3s.yaml /home/ubuntu
+      sudo chmod 777 /home/ubuntu/k3s.yaml
     EOF
   }
 }
