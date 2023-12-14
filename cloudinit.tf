@@ -40,8 +40,12 @@ data "cloudinit_config" "_" {
         sleep 10
       done
       echo "K3S API server ($KUBE_API_SERVER) appears to be up."
-      sudo cp /etc/rancher/k3s/k3s.yaml /home/ubuntu
-      sudo chmod 777 /home/ubuntu/k3s.yaml
+      if [ -f /etc/rancher/k3s/k3s.yaml ]; then
+        cp /etc/rancher/k3s/k3s.yaml /home/ubuntu || echo "Failed to copy k3s.yaml"
+        chmod 777 /home/ubuntu/k3s.yaml
+      else
+        echo "/etc/rancher/k3s/k3s.yaml does not exist"
+      fi
     EOF
   }
 }

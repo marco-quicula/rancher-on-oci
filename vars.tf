@@ -73,6 +73,11 @@ variable "ks3_version" {
   default = "v1.26.10+k3s2"
 }
 
+variable "cert-manager_version" {
+  type    = string
+  default = "1.13.3"
+}
+
 variable "domain_rancher" {
   type    = string
   default = "oracle.quicula.com.br"
