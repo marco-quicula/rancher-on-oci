@@ -1,6 +1,6 @@
 data "external" "ks3_file" {
   depends_on = [data.cloudinit_config._[1]]
-  program    = ["bash", "shell/get_file_content.sh", "ubuntu", oci_core_instance._[1].public_ip, "/home/ubuntu/k3s.yaml"]
+  program    = ["bash", "shell/get_file_content.sh", "${local_file.ssh_private_key.filename}", "ubuntu", oci_core_instance._[1].public_ip, "/home/ubuntu/k3s.yaml"]
 }
 
 resource "local_file" "kubeconfig" {

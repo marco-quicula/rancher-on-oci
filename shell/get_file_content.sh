@@ -3,17 +3,26 @@
 # Exit script immediately on first error
 set -e
 
-# Replace with your username
-USERNAME="$1"
+# Check if the correct number of arguments are provided
+if [ "$#" -ne 4 ]; then
+    echo "Usage: $0 <connection_file> <username> <host> <file>"
+    exit 1
+fi
 
-# Get the host from the first script argument
-HOST="$2"
+# Get the connection file from the fourth script argument
+CONNECTION_FILE="$1"
 
-# Get the file name from the second script argument
-FILE="$3"
+# Get the username from the first script argument
+USERNAME="$2"
+
+# Get the host from the second script argument
+HOST="$3"
+
+# Get the file name from the third script argument
+FILE="$4"
 
 # Connect to the cluster and get the file content
-FILE_CONTENT=$(ssh -o StrictHostKeyChecking=no -i instance_key $USERNAME@$HOST "sudo cat $FILE")
+FILE_CONTENT=$(ssh -o StrictHostKeyChecking=no -i $CONNECTION_FILE $USERNAME@$HOST "sudo cat $FILE")
 
 # Encode the file content in base64
 FILE_CONTENT_BASE64=$(echo -n "$FILE_CONTENT" | base64 -w0) # Linux
