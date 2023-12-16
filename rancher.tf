@@ -97,5 +97,12 @@ locals {
 
 output "bootstrapPassword" {
   value = random_string.bootstrapPassword.result
+}
 
+output "rancher_host" {
+  value = ${var.sub_domain_rancher}-${local.nodes[1].node_number_to_string}.${var.domain_rancher}
+}
+
+output "rancher_public_ip" {
+  value = oci_core_instance._[1].public_ip
 }

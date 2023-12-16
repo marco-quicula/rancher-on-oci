@@ -15,6 +15,26 @@ bootstrapPassword=$6
 
 export KUBECONFIG=$kubeconfig
 
+#!/bin/bash
+
+#!/bin/bash
+
+# Infinite loop
+while true; do
+  # Check if the Kubernetes cluster is active
+  if kubectl cluster-info; then
+    echo "Kubernetes cluster is active."
+    
+    # If the cluster is active, break the loop
+    break
+  else
+    echo "Kubernetes cluster is not active."
+  fi
+
+  # Wait for 10 seconds before the next check
+  sleep 10
+done
+
 kubectl create namespace cattle-system
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v${cert_manager_version}/cert-manager.crds.yaml
 
