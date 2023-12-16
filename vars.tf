@@ -92,3 +92,15 @@ variable "sub_domain_rancher" {
   type    = string
   default = "rancher"
 }
+
+variable "install_kubernetes_tools_on_terraform_execution_environment" {
+  description = "Whether to install Kubernetes tools (kubectl and helm) on the Terraform execution environment"
+  type        = bool
+  default     = true
+}
+
+variable "rancher_installation_mode" {
+  description = "The mode of Rancher installation. Can be 'local' or 'remote'."
+  type        = string
+  default     = "local"
+}

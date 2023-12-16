@@ -14,5 +14,7 @@
 #private_key_path = "your_private_key_path"
 
 #OCI Compartment
-compartment_name        = "mycompartment"
-compartment_description = "Compartment to install the resources."
+compartment_name                                            = "mycompartment"
+compartment_description                                     = "Compartment to install the resources."
+install_kubernetes_tools_on_terraform_execution_environment = true
+rancher_installation_mode                                   = "local"
