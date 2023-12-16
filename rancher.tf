@@ -100,7 +100,7 @@ output "bootstrapPassword" {
 }
 
 output "rancher_host" {
-  value = ${var.sub_domain_rancher}-${local.nodes[1].node_number_to_string}.${var.domain_rancher}
+  value = "${var.sub_domain_rancher}-${local.nodes[1].node_number_to_string}.${var.domain_rancher}"
 }
 
 output "rancher_public_ip" {
