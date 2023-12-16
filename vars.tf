@@ -78,6 +78,11 @@ variable "cert-manager_version" {
   default = "1.13.3"
 }
 
+variable "rancher_version" {
+  type    = string
+  default = "2.7.9"
+}
+
 variable "domain_rancher" {
   type    = string
   default = "oracle.quicula.com.br"
