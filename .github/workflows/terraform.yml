@@ -131,6 +131,7 @@ jobs:
         echo 'Changing values to terraform.tfvars file'
         echo '############################################################################' 
         sed -i '/^compartment_name/c\compartment_name="${{ vars.TF_VAR_COMPARTMENT }}"' terraform.tfvars
+        sed -i '/^rancher_installation_mode/c\rancher_installation_mode = "remote"' terraform.tfvars
         echo ' '
         echo '############################################################################' 
         echo 'Formating terraform.tfvars file'
