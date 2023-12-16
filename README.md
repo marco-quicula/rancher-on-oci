@@ -42,6 +42,21 @@ cd r3. Include the following SECRETS in your REPOSITORY.
     - `TF_WORKSPACE` : Terraform Clod Workspace
     - `TF_VAR_COMPARTMENT` : OCI Compartment
 
+## Important Considerations
+
+### 1. Local Terraform Execution
+
+When running Terraform locally, ensure that the `sudo` command does not prompt for a password. This can be configured in your environment or may have been set by running a previous command using `sudo`.
+
+### 2. Kubernetes Tools
+
+If you already have `kubectl` and `helm` installed in your local environment, you can simply change the value of the `install_kubernetes_tools_on_terraform_execution_environment` variable to `false`.
+
+### 3. Rancher Installation
+
+If you wish to execute the Rancher installation directly on the created instance, change the value of the `rancher_installation_mode` variable to `remote`.
+
+Please follow these considerations when setting up and running the project.
 
 ## Configuring Rancher
 Once the infrastructure is ready, you can configure Rancher. Here are the basic steps:
