@@ -36,7 +36,7 @@ variable "availability_domain" {
 
 variable "how_many_nodes" {
   type    = number
-  default = 2
+  default = 1 #Only one node is supported for now
 }
 
 variable "ocpus_per_node" {
@@ -71,6 +71,16 @@ variable "subnet_cidr_block_initial_ip" {
 variable "ks3_version" {
   type    = string
   default = "v1.26.10+k3s2"
+}
+
+variable "cert-manager_version" {
+  type    = string
+  default = "1.13.3"
+}
+
+variable "rancher_version" {
+  type    = string
+  default = "2.7.9"
 }
 
 variable "domain_rancher" {
