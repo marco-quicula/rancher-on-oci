@@ -51,4 +51,19 @@ data "cloudinit_config" "_" {
       fi
     EOF
   }
+
+  # Prepare K3s for Rancher install on local terraform execution environment
+  part {
+    filename     = "3-k3s.sh"
+    content_type = "text/x-shellscript"
+    content      = <<-EOF
+        #!/bin/sh
+        if [ -f /etc/rancher/k3s/k3s.yaml ]; then
+          cp /etc/rancher/k3s/k3s.yaml /home/ubuntu || echo "Failed to copy k3s.yaml"
+          chmod 777 /home/ubuntu/k3s.yaml
+        else
+          echo "/etc/rancher/k3s/k3s.yaml does not exist"
+        fi
+      EOF
+  }
 }
