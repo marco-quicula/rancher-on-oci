@@ -36,7 +36,7 @@ variable "availability_domain" {
 
 variable "how_many_nodes" {
   type    = number
-  default = 2
+  default = 1 #Only one node is supported for now
 }
 
 variable "ocpus_per_node" {
@@ -73,6 +73,16 @@ variable "ks3_version" {
   default = "v1.26.10+k3s2"
 }
 
+variable "cert-manager_version" {
+  type    = string
+  default = "1.13.3"
+}
+
+variable "rancher_version" {
+  type    = string
+  default = "2.7.9"
+}
+
 variable "domain_rancher" {
   type    = string
   default = "oracle.quicula.com.br"
@@ -81,4 +91,16 @@ variable "domain_rancher" {
 variable "sub_domain_rancher" {
   type    = string
   default = "rancher"
+}
+
+variable "install_kubernetes_tools_on_terraform_execution_environment" {
+  description = "Whether to install Kubernetes tools (kubectl and helm) on the Terraform execution environment"
+  type        = bool
+  default     = true
+}
+
+variable "rancher_installation_mode" {
+  description = "The mode of Rancher installation. Can be 'local' or 'remote'."
+  type        = string
+  default     = "local"
 }
