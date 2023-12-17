@@ -12,9 +12,14 @@ resource "null_resource" "install_k3s_workers" {
     private_key = local_file.ssh_private_key.content
     host        = oci_core_instance._[each.key].public_ip
   }
+
   provisioner "remote-exec" {
     inline = [
-      "echo '${base64encode(file("shell/install_k3s_workers.sh"))}' | base64 --decode | sh -s ${local.nodes[1].private_ip_address} ${var.ks3_version} ${data.external.ks3_control_plane_token.result.file_content}"
+      "echo '${base64encode(file("shell/install_k3s_workers.sh"))}' | base64 --decode | sh -s ${local.nodes[1].private_ip_address} ${var.ks3_version} ${local.ks3_control_plane_token}"
     ]
   }
+}
+
+locals {
+  ks3_control_plane_token = base64decode(data.external.ks3_control_plane_token.result.file_content)
 }
