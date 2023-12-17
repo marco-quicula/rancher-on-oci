@@ -21,4 +21,5 @@ echo "."
 echo "K3S API server controleplane ($KUBE_API_SERVER_WORKER) appears to be up."
 echo "."
 echo "Installing KS3 worker node..."
-curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="$K3S_VERSION" K3S_URL=https://$KUBE_API_SERVER_WORKER:6443 K3S_TOKEN=$K3S_TOKEN_ARG sh -s -
+#echo "curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="$K3S_VERSION" K3S_URL=https://$KUBE_API_SERVER_WORKER:6443 K3S_TOKEN=$K3S_TOKEN_ARG sudo sh -s -"
+curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="$K3S_VERSION" K3S_URL=https://$KUBE_API_SERVER_WORKER:6443 K3S_TOKEN=$K3S_TOKEN_ARG sudo sh -s -

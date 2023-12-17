@@ -14,7 +14,7 @@ resource "null_resource" "install_k3s_workers" {
   }
   provisioner "remote-exec" {
     inline = [
-      "echo '${base64encode(file("shell/install_k3s_workers.sh"))}' | base64 --decode | sh -s ${oci_core_instance._[1].public_ip} ${var.ks3_version} ${data.external.ks3_control_plane_token.result.file_content}"
+      "echo '${base64encode(file("shell/install_k3s_workers.sh"))}' | base64 --decode | sh -s ${local.nodes[1].private_ip_address} ${var.ks3_version} ${data.external.ks3_control_plane_token.result.file_content}"
     ]
   }
 }
