@@ -39,6 +39,11 @@ variable "how_many_nodes" {
   default = 1
 }
 
+variable "how_many_rancher_replicas" {
+  type    = number
+  default = 1
+}
+
 variable "ocpus_per_node" {
   type    = number
   default = 1
