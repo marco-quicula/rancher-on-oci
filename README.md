@@ -3,7 +3,9 @@
 # rancher-on-oci
 Terraform scripts to provision an OCI cluster, install k3s, and configure Rancher. A complete solution for container infrastructure.
 
+<img src="images/terraform.png" >
 <img src="images/rancher.png" >
+<br>
 <img src="images/k3s.png">
 <img src="images/oci.png">
 
