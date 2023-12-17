@@ -36,7 +36,7 @@ variable "availability_domain" {
 
 variable "how_many_nodes" {
   type    = number
-  default = 1 #Only one node is supported for now
+  default = 1
 }
 
 variable "ocpus_per_node" {
