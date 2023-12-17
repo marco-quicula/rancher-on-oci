@@ -62,7 +62,7 @@ resource "null_resource" "install_rancher_on_remotehost_local" {
   count      = var.rancher_installation_mode == "local" ? 1 : 0
   depends_on = [null_resource.install_kubectl_on_remotehost, null_resource.install_helm_on_remotehost, oci_core_instance._[1]]
   provisioner "local-exec" {
-    command = "sudo sh shell/install_rancher.sh ${local_file.kubeconfig[count.index].filename} ${var.cert-manager_version} ${var.rancher_version} ${var.sub_domain_rancher}-${local.nodes[1].node_number_to_string}.${var.domain_rancher} 1 ${random_string.bootstrapPassword.result}"
+    command = "sudo sh shell/install_rancher.sh ${local_file.kubeconfig[count.index].filename} ${var.cert-manager_version} ${var.rancher_version} ${var.sub_domain_rancher}-${local.nodes[1].node_number_to_string}.${var.domain_rancher} ${var.how_many_rancher_replicas} ${random_string.bootstrapPassword.result}"
   }
 }
 
@@ -79,7 +79,7 @@ resource "null_resource" "install_rancher_on_remotehost_remote" {
 
   provisioner "remote-exec" {
     inline = [
-      "echo '${base64encode(file("shell/install_rancher.sh"))}' | base64 --decode | sh -s /home/ubuntu/k3s.yaml ${var.cert-manager_version} ${var.rancher_version} ${var.sub_domain_rancher}-${local.nodes[1].node_number_to_string}.${var.domain_rancher} 1 ${random_string.bootstrapPassword.result}"
+      "echo '${base64encode(file("shell/install_rancher.sh"))}' | base64 --decode | sh -s /home/ubuntu/k3s.yaml ${var.cert-manager_version} ${var.rancher_version} ${var.sub_domain_rancher}-${local.nodes[1].node_number_to_string}.${var.domain_rancher} ${var.how_many_rancher_replicas} ${random_string.bootstrapPassword.result}"
     ]
   }
 }
