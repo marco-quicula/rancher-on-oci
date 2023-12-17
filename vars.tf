@@ -36,7 +36,7 @@ variable "availability_domain" {
 
 variable "how_many_nodes" {
   type    = number
-  default = 1
+  default = 3
 }
 
 variable "how_many_rancher_replicas" {
