@@ -11,3 +11,4 @@ settings.json
 terraform.tfstate*
 terraform_to_oci
 terraform_to_oci.pub
+rancher-on-oci.code-workspace
