@@ -4,7 +4,8 @@ data "external" "ks3_control_plane_token" {
 }
 
 resource "null_resource" "install_k3s_workers" {
-  for_each = { for key, value in local.nodes : key => value if value.role == "worker" }
+  depends_on = [null_resource.install_rancher_on_remotehost_local, null_resource.install_rancher_on_remotehost_remote]
+  for_each   = { for key, value in local.nodes : key => value if value.role == "worker" }
   connection {
     type        = "ssh"
     user        = "ubuntu"
