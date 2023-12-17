@@ -16,7 +16,7 @@
 #OCI Compartment
 compartment_name                                            = "mycompartment"
 compartment_description                                     = "Compartment to install the resources."
-how_many_nodes                                              = 4
-how_many_rancher_replicas                                   = 2
+how_many_nodes                                              = 1
+how_many_rancher_replicas                                   = 1
 install_kubernetes_tools_on_terraform_execution_environment = true
 rancher_installation_mode                                   = "local"
